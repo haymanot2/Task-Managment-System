@@ -1,9 +1,9 @@
 const {Router} =require("express")
-const routes =Router()
+const userRoutes =Router()
 import { userController } from "../controllers/userController"
-routes.get("/",userController.index)
-routes.get("/:id",userController.findUniqeUser)
-routes.post("/add",userController.createUser)
-routes.put("/:id",userController.updateUser)
-routes.delete("/:id",userController.deletUser)
-export default routes
+userRoutes.get("/",userController.index)
+userRoutes.get("/:id",userController.findUniqeUser)
+userRoutes.post("/add",userController.createUser)
+userRoutes.put("/:id",userController.updateUser)
+userRoutes.delete("/:id",userController.deletUser)
+export default userRoutes

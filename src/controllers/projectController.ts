@@ -1,22 +1,38 @@
 import  prisma from "../services/prisma"
-
+import { Request, Response } from 'express';
+const { validateProjectCreation } = require('../utils/validation');
 export const projectController ={
     async index(req:Request,res:Response){
         const projects =await prisma.project.findMany()
         return res.json(projects)
     },
-    async createProject(req:Request,res:Response){
-        const projectData =req.body;
-        const project =await prisma.project.create({
-                  
-            data:{
-                name        :projectData.name   , 
-                description :projectData.description 
-               
-            }
-        })
-        return res.json({project:project})
-    },
+    async createProject(req:Request,res:Response) {
+        const projectData = req.body;
+      
+        
+        const validationErrors = validateProjectCreation(projectData.name);
+      
+       
+        if (validationErrors.length > 0) {
+          return res.status(400).json({ errors: validationErrors });
+        }
+      
+      
+        try {
+          const project = await prisma.project.create({
+            data: {
+              name: projectData.name,
+              description: projectData.description,
+              user: projectData.user,
+            },
+          });
+          return res.json({ project });
+        } catch (error) {
+        
+          console.error(error);
+          return res.status(500).json({ error: 'Internal server error' });
+        }
+      },
     async findUniqeProject(req:Request,res:Response){
         const projectId  =req.params.id;
         const uniqueProject =await prisma.project.findUnique({

@@ -1,7 +1,8 @@
 const express = require('express');
-import routes from './routes/userRoute';
+import userRoutes from './routes/userRoute';
 import taskRoutes from './routes/taskRoutes';
 import projectRoutes from './routes/projectRoute';
+import authenticateToken from "./middleware/authenticateToken "
 const cors =require("cors")
 
 const bodyParser=require("body-parser")
@@ -15,9 +16,15 @@ app.use(express.json())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(cors());
+
+app.use('/api/projects', authenticateToken);
+app.use('/api/projects/:projectId', authenticateToken);
+app.use('/api/projects/:projectId/tasks', authenticateToken);
+app.use('/api/projects/:projectId/tasks/:taskId', authenticateToken);
+app.use('/api/projects/:projectId/tasks/:taskId', authenticateToken);
 app.use("/api/tasks",taskRoutes)
 app.use("/api/project",projectRoutes)
-app.use("/api/users",routes)
+app.use("/api/users",userRoutes)
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
