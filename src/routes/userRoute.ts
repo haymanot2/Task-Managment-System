@@ -4,6 +4,7 @@ import { userController } from "../controllers/userController"
 userRoutes.get("/",userController.index)
 userRoutes.get("/:id",userController.findUniqeUser)
 userRoutes.post("/add",userController.createUser)
+userRoutes.get("/login",userController.loginUser)
 userRoutes.put("/:id",userController.updateUser)
 userRoutes.delete("/:id",userController.deletUser)
 export default userRoutes

@@ -17,13 +17,9 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(cors());
 
-app.use('/api/projects', authenticateToken);
-app.use('/api/projects/:projectId', authenticateToken);
-app.use('/api/projects/:projectId/tasks', authenticateToken);
-app.use('/api/projects/:projectId/tasks/:taskId', authenticateToken);
-app.use('/api/projects/:projectId/tasks/:taskId', authenticateToken);
+
 app.use("/api/tasks",taskRoutes)
-app.use("/api/project",projectRoutes)
+app.use("/api/projects",projectRoutes)
 app.use("/api/users",userRoutes)
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);

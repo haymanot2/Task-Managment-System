@@ -1,7 +1,8 @@
 import  prisma from "../services/prisma"
 import { Request, Response } from 'express';
 const { validateUserRegistration } = require('../utils/validation');
-
+const jwt=require("'jsonwebtoken'")
+const secretKey = 'your-secret-key';
 export const userController ={
     async index(req:Request,res:Response){
         const users =await prisma.user.findMany()
@@ -68,6 +69,36 @@ export const userController ={
             },
         })
         return res.json({deletUser:deletUser})
+    },
+
+
+    async loginUser(req:Request,res:Response) {
+      const { username, password } = req.body;
+    
+      try {
+        const user = await prisma.user.findUnique({
+          where: {
+            username: username,
+          },
+        });
+    
+        if (!user) {
+          return res.status(404).json({ error: 'User not found' });
+        }
+    
+        
+        if (user.password !== password) {
+          return res.status(401).json({ error: 'Invalid credentials' });
+        }
+    
+        
+        const token = jwt.sign({ username }, secretKey);
+    
+        return res.json({ token });
+      } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Internal server error' });
+      }
     }
 
 }
