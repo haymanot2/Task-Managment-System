@@ -1,10 +1,7 @@
 const {Router} =require("express")
 const userRoutes =Router()
 import { userController } from "../controllers/userController"
-userRoutes.get("/",userController.index)
-userRoutes.get("/:id",userController.findUniqeUser)
-userRoutes.post("/add",userController.createUser)
-userRoutes.get("/login",userController.loginUser)
-userRoutes.put("/:id",userController.updateUser)
-userRoutes.delete("/:id",userController.deletUser)
+userRoutes.post("/register",userController.createUser)
+userRoutes.post("/login",userController.loginUser)
+userRoutes.get("/profile/:id",userController.getUserProfile)
 export default userRoutes

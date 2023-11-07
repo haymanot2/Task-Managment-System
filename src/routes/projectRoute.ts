@@ -1,14 +1,14 @@
 import { Router } from "express";
 import { projectController } from "../controllers/projectController";
-import { isAdmin, isOwner } from "../middleware/authMiddleware"; 
-import {authenticateToken} from "../middleware/authenticateToken "
+const  authenticateToken =require( "../middleware/authenticateToken ")
 
 const projectRoutes = Router();
 projectRoutes.use(authenticateToken)
-projectRoutes.get("/", projectController.index);
-projectRoutes.get("/:id", projectController.findUniqeProject);
-projectRoutes.post("/create", projectController.createProject);
-projectRoutes.put("/:id", projectController.updateProject);
-projectRoutes.delete("/:id", isAdmin, isOwner, projectController.deleteProject);
-
+projectRoutes.get("/", projectController.listProjects);
+projectRoutes.post( "/",projectController.createProject);
+projectRoutes.get("/:projectId", projectController.findUniqeProject);
+projectRoutes.put("/:projectId", projectController.updateProject);
+projectRoutes.delete("/:projectId",  projectController.deleteProject);
+projectRoutes.get("/:projectId/tasks", projectController.listTask);
+projectRoutes.post("/:projectId/tasks", projectController.createTask);
 export default projectRoutes;

@@ -1,13 +1,12 @@
 import { Router } from "express";
 import { taskController } from "../controllers/taskController";
-import { isAdmin, isOwner } from "../middleware/authMiddleware"; 
-import {authenticateToken} from "../middleware/authenticateToken "
+
 const taskRoutes = Router();
-taskRoutes.use(authenticateToken)
-taskRoutes.get("/", taskController.index);
-taskRoutes.get("/:id", taskController.findUniqeTask);
-taskRoutes.post("/create", taskController.createTask);
-taskRoutes.put("/:id", taskController.updateTask);
-taskRoutes.delete("/:id", isAdmin, isOwner, taskController.deleteTask);
+taskRoutes.get("/:taskId", taskController.findUniqeTask);
+taskRoutes.put("/:taskId", taskController.updateTask);
+taskRoutes.delete("/:taskId", taskController.deleteTask);
+taskRoutes.post("/:taskId/attachments", taskController.createAttachments );
+taskRoutes.get("/:taskId/attachments", taskController.findAttachments );
+taskRoutes.get("/:taskId/attachments/:attachmentId", taskController.deleteAttachments);
 
 export default taskRoutes;
