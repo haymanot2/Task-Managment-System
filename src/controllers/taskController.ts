@@ -129,7 +129,7 @@ export const taskController ={
             id: attachment.id,
           },
         });
-        return res.status(204).end();
+        return res.status(204).json({message: 'methe Uploaded file deleted'});
       } catch (error) {
         console.error(error);
         return res.status(500).json({ message: 'Internal server error' });
