@@ -35,7 +35,9 @@ Authorization: Bearer [token]
 
    - POST /api/auth/register: Register a new user.
    - POST /api/auth/login: Log in an existing user.
- 
+- User Profile:
+
+    - GET /api/profile/:id  : Fetch the user profile information.
      
 - Project Management:
 
@@ -51,9 +53,10 @@ Authorization: Bearer [token]
     - GET /api/tasks/:taskId: Fetch a specific task by ID.
     - PUT /api/tasks/:taskId: Update a specific task by ID.
     - DELETE /api/tasks/:taskId: Delete a specific task by ID.
-- User Profile:
+    - POST /api/tasks/:taskId/attachments: Upload a new file .
+    - GET /api/tasks/:taskId/attachments/:attachmentId : Fetch a specific Uploaded file by ID.
+    - DELETE /api/tasks/:taskId/attachments/:attachmentId: Delete a specific uploaded file by ID.
 
-    - GET /api/profile/:id  : Fetch the user profile information.
 
 
 
