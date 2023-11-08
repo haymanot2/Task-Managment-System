@@ -43,14 +43,14 @@ Authorization: Bearer [token]
      
 - Project Management:
 
-    - GET /api/projects: Fetch all projects for the authenticated user.
+    - GET /api/projects: Fetch all projects for the authenticated users, user can also limit add search/filter parameter .
     - POST /api/projects: Create a new project.
     - GET /api/projects/:projectId: Fetch a specific project by ID.
     - PUT /api/projects/:projectId: Update a specific project by ID.
     - DELETE /api/projects/:projectId: Delete a specific project by ID.
 - Task Management:
 
-    - GET /api/projects/:projectId/tasks: Fetch all tasks for a specific project.
+    - GET /api/projects/:projectId/tasks: Fetch all tasks for a specific project ,user can also limit add search/filter parameter.
     - POST /api/projects/:projectId/tasks: Create a new task within a project.
     - GET /api/tasks/:taskId: Fetch a specific task by ID.
     - PUT /api/tasks/:taskId: Update a specific task by ID.
