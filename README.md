@@ -1,7 +1,7 @@
 # Task Management System
 
 ## Task management application built with Express.js, PostgreSQL, and Prisma ORM.
-This project is a robust backend API and database system for streamlined project and task management. Users can  register and login  and used JSON Web Tokens (JWT) for authentication. Once authenticated, users can access their profiles, create projects, and perform CRUD operations on them. They can also create tasks within projects and perform CRUD operation on them again and attach/upload files for specific task . This powerful backend system enhances productivity and promotes efficient workflows in project and task management.
+This project is a robust backend API and database system for streamlined project and task management. Users can  register and login  and for login used JSON Web Tokens (JWT) for authentication. Once authenticated, users can access their profiles, create projects, and perform CRUD operations on them. They can also create tasks within projects and perform CRUD operation on them again and attach/upload files for specific task . This powerful backend system enhances productivity and promotes efficient workflows in project and task management.
 
 ## Installation
 
