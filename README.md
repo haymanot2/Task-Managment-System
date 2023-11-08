@@ -29,7 +29,9 @@ To access protected routes,you need to include an authentication token in the re
 registration and login, you'll receive a JWT token that needs to be included in the Authorization header as follows:
 Authorization: Bearer [token]
 
+
 # API Endpoints
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/30949696-fde5028a-2d79-4380-a31c-dd742c23bf0c?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D30949696-fde5028a-2d79-4380-a31c-dd742c23bf0c%26entityType%3Dcollection%26workspaceId%3Dcc4f32d0-8212-461d-9d51-99a88d19c84e)
 - The following API endpoints are available:
 - User Authentication:
 
@@ -56,7 +58,6 @@ Authorization: Bearer [token]
     - POST /api/tasks/:taskId/attachments: Upload a new file .
     - GET /api/tasks/:taskId/attachments/:attachmentId : Fetch a specific Uploaded file by ID.
     - DELETE /api/tasks/:taskId/attachments/:attachmentId: Delete a specific uploaded file by ID.
-
 
 
 
