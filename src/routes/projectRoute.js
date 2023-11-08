@@ -1,5 +1,5 @@
-import { Router } from "express";
-import { projectController } from "../controllers/projectController";
+const { Router } =require("express");
+const   projectController  =require ("../controllers/projectController");
 const  authenticateToken =require( "../middleware/authenticateToken ")
 const projectRoutes = Router();
 projectRoutes.use(authenticateToken)
@@ -12,4 +12,4 @@ projectRoutes.get("/:projectId/tasks", projectController.listTask);
 projectRoutes.post("/:projectId/tasks", projectController.createTask);
 projectRoutes.post("/:projectId/tasks/:userId", projectController.assignTask);
 projectRoutes.delete("/:projectId/tasks/:userId", projectController.deleteAssignTask);
-export default projectRoutes;
+module.exports = projectRoutes;

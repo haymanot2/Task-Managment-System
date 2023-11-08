@@ -1,7 +1,7 @@
 const express = require('express');
-import userRoutes from './routes/userRoute';
-import taskRoutes from './routes/taskRoutes';
-import projectRoutes from './routes/projectRoute';
+const userRoutes =require('./routes/userRoute');
+const  taskRoutes =require ('./routes/taskRoutes');
+const  projectRoutes =require('./routes/projectRoute');
 const cors =require("cors")
 const bodyParser=require("body-parser")
 require("dotenv").config()

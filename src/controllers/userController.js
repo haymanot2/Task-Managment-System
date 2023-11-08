@@ -1,12 +1,11 @@
-import  prisma from "../services/prisma"
-import { Request, Response } from 'express';
+const  prisma =require ("../services/prisma");
 const { validateUserRegistration } = require('../utils/validation');
 const jwt = require('jsonwebtoken')
 require('dotenv').config();
 const jwtSecret = process.env.JWT_SECRET;
-export const userController ={
+ const userController ={
 
-  async createUser(req:Request,res:Response) {
+  async createUser(req,res) {
     const userData = req.body;
     const validationErrors = validateUserRegistration(userData.username, userData.email);
     if (validationErrors.length > 0) {
@@ -27,7 +26,7 @@ export const userController ={
       return res.status(500).json({ error: 'Internal server error' });
     }
   },
-  async loginUser(req:Request,res:Response) {
+  async loginUser(req,res) {
     const { username, password } = req.body;
   
     try {
@@ -57,7 +56,7 @@ export const userController ={
   },
   
 
-  async getUserProfile(req: Request, res: Response) {
+  async getUserProfile(req,res) {
     const requestedUserId = req.params.id;
     try {
       const {userId,userRole} = req.user; 
@@ -90,3 +89,4 @@ export const userController ={
 
 
 }
+module.exports = userController;

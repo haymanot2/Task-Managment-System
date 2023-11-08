@@ -1,9 +1,7 @@
-import  prisma from "../services/prisma"
-import upload  from "../middleware/attach"
-import { Request, Response } from 'express';
-const { validateTaskCreation } = require('../utils/validation');
-export const taskController ={
-    async findUniqeTask(req:Request,res:Response){
+const  prisma =require ("../services/prisma");
+const upload  =require("../middleware/attach");
+ const taskController ={
+    async findUniqeTask(req,res){
         const taskId =req.params.taskId;
         const uniqueTask =await prisma.task.findUnique({
             where:{
@@ -13,7 +11,7 @@ export const taskController ={
         return res.json({uniqueTask:uniqueTask})
     },
 
-    async updateTask(req:Request,res:Response){
+    async updateTask(req,res){
         const taskId =req.params.taskId;
         const title=req.body.title
         const description=req.body.description
@@ -32,7 +30,7 @@ export const taskController ={
         })
         return res.json({updateTask:updateTask})
     },
-    async deleteTask(req: Request, res: Response) {
+    async deleteTask(req,res) {
       const taskId = req.params.taskId;
       const { userId, userRole } = req.user;
     
@@ -63,7 +61,7 @@ export const taskController ={
         return res.status(500).json({ error: 'Internal server error' });
       }
     },
-    async createAttachments(req:Request,res:Response) {
+    async createAttachments(req,res) {
       try {
         const task = await prisma.task.findUnique({
           where: { id: req.params.taskId },
@@ -96,7 +94,7 @@ export const taskController ={
     },
 
 
-    async findAttachments(req:Request,res:Response){
+    async findAttachments(req,res){
       try {
         const attachment = await prisma.attachment.findUnique({
           where: {
@@ -113,7 +111,7 @@ export const taskController ={
       } },
 
 
-    async deleteAttachments(req:Request,res:Response){
+    async deleteAttachments(req,res){
       try {
         const attachment = await prisma.attachment.findUnique({
           where: {
@@ -141,6 +139,6 @@ export const taskController ={
   
 }
 
-
+module.exports = taskController;
 
 

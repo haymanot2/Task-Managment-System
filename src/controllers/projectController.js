@@ -1,8 +1,7 @@
-import  prisma from "../services/prisma"
-import { Request, Response } from 'express';
+const  prisma =require ("../services/prisma");
 const { validateProjectCreation,validateTaskCreation } = require('../utils/validation');
-export const projectController ={
-    async listProjects(req:Request,res:Response){
+ const projectController ={
+    async listProjects(req,res){
       const { search, filter } = req.query;
       try {
         let projects;
@@ -10,13 +9,13 @@ export const projectController ={
           projects = await prisma.project.findMany({
             where: {
               OR: [
-                { name: { contains: search as string, mode: 'insensitive' } },
-                { description: { contains: search as string, mode: 'insensitive' } },
+                { name: { contains: search , mode: 'insensitive' } },
+                { description: { contains: search , mode: 'insensitive' } },
               ],
             },
           });
         } else if (filter) {
-          const filterOptions: string[] = (filter as string).split(',');
+          const filterOptions = (filter ).split(',');
           projects = await prisma.project.findMany({
             where: {
               role : { in: filterOptions },
@@ -31,7 +30,7 @@ export const projectController ={
         res.status(500).json({ error: 'An error occurred while retrieving projects' });
       }
     },
-    async createProject(req: Request, res: Response) {
+    async createProject(req, res) {
       const projectData = req.body;
       try {
           const { userId } = req.user;
@@ -55,7 +54,7 @@ export const projectController ={
         return res.status(401).json({ error: 'error' });
       }
     },
-    async findUniqeProject(req:Request,res:Response){
+    async findUniqeProject(req,res){
         const projectId  =req.params.projectId;
         const uniqueProject =await prisma.project.findUnique({
             where:{
@@ -66,7 +65,7 @@ export const projectController ={
         return res.json({uniqueProject:uniqueProject})
     },
 
-    async updateProject(req:Request,res:Response){
+    async updateProject(req,res){
         const projectId =req.params.projectId;
         const name=req.body.name
         const description=req.body.description
@@ -84,7 +83,7 @@ export const projectController ={
         })
         return res.json({updateProject:updateProject})
     },
-    async deleteProject(req:Request,res:Response) {
+    async deleteProject(req,res) {
       const projectId = req.params.projectId;
       const {userId,userRole}=req.user;
       try {
@@ -127,7 +126,7 @@ export const projectController ={
       }
     },
 
-    async listTask(req: Request, res: Response) {
+    async listTask(req, res) {
       const { search, filter } = req.query;
       const projectId = req.params.projectId;
     
@@ -139,13 +138,13 @@ export const projectController ={
             where: {
               project: { id: projectId },
               OR: [
-                { title: { contains: search as string, mode: 'insensitive' } },
-                { description: { contains: search as string, mode: 'insensitive' } },
+                { title: { contains: search , mode: 'insensitive' } },
+                { description: { contains: search , mode: 'insensitive' } },
               ],
             },
           });
         } else if (filter) {
-          const filterOptions: string[] = (filter as string).split(',');
+          const filterOptions = (filte).split(',');
     
           tasks = await prisma.task.findMany({
             where: {
@@ -167,7 +166,7 @@ export const projectController ={
         res.status(500).json({ error: 'An error occurred while retrieving tasks' });
       }
     },
-    async createTask(req: Request, res: Response) {
+    async createTask(req, res) {
       const taskData = req.body;
       const {userId}=req.user;
       const validationErrors = validateTaskCreation(taskData.title);
@@ -195,7 +194,7 @@ export const projectController ={
         return res.status(500).json({ error: 'Internal server error' });
       }
     },
-      async assignTask(req: Request, res: Response){
+      async assignTask(req, res){
         const { projectId, taskId } = req.params;
          const { assignedUserId } = req.body;
          try {
@@ -256,7 +255,7 @@ export const projectController ={
       },
 
 
-      async deleteAssignTask(req:Request,res:Response) {
+      async deleteAssignTask(req,res) {
         const projectId = req.params.projectId;
         const {userId,userRole}=req.user;
         try {
@@ -308,4 +307,4 @@ export const projectController ={
 
 }
 
-
+module.exports = projectController;
